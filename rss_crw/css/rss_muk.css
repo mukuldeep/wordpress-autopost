@@ -1,0 +1,24 @@
+
+.rss_muk_admin_container {
+    padding: 1%;
+    border-radius: 1%;
+    border: #ccc solid 1px;
+	margin:30px;
+	background-color: #fff;
+	}
+.rss_muk_admin_item {
+    position: relative;
+    padding:inherit;
+    border: 1px solid #eee;
+	border-radius: 1%;
+}
+.dict_list-group-item.active, .dict_list-group-item.active:focus, .dict_list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+.dict_list-group-item:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
