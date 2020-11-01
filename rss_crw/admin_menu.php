@@ -122,20 +122,7 @@ function rss_muk_update_img_data(){//INCOMPLETE to be cronned
 	if(COUNT($res)==1){
 		
 		echo "<img src='".$res[0]->img_url."'/>";
-	   /*if(is_image($img_link))
-	   {	//echo "img size:".getimagesize($img_link);
-	   }*/
-		/*$data_from_link=data_fetch_from_link($res[0]->link,$res[0]->id);
-		//*
-		$lv=time();
-		$curr_id=$res[0]->id;
-		$wpdb->update($img_table, 
-			array( 
-				'last_visited' =>$lv
-			), 
-			array( 'id' =>$curr_id)
-		);
-		//*/
+	   
 	}
 }
 
@@ -232,21 +219,7 @@ function rss_muk_ins(){
 				echo '<div class="updated notice"><p>you have submitted "'.$ins_phrase.'"</p></div>';
 				
 				rss_muk_ins_g_phrase($ins_phrase);
-				/*$res = $wpdb->get_results("SELECT COUNT(id) as cnt FROM ".$g_phrase_table." WHERE phrase='".$ins_phrase."'");
-				if($res[0]->cnt>0){
-					echo '<div class="updated error"><p>phrase already exists!</p></div>';
-				}else{
-					$ins_data=array(
-						'phrase' => $ins_phrase,
-						'page_no' => 0
-					 );
-					if($wpdb->insert( $g_phrase_table, $ins_data)){
-						echo '<div class="updated notice"><p>phrase has successfully been saved</p></div>';
-						//next_g_src($ins_phrase);
-					}else{
-						echo '<div class="updated error"><p>error while saving the phrase</p></div>';
-					}
-				}*/
+				
 			}else{
 				echo '<div class="updated error"><p>please check the input again!</p></div>';
 			}
