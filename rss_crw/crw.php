@@ -118,38 +118,7 @@ function rss_muk_xml_to_array($root,$data,$heading,$first_h2_encountered,$first_
 		echo "<hr>";
 		return;
 	}
-	/*
-	if($root->nodeName=='h2'){
-		echo $root->nodeName."<br>";
-		print_r($root);
-		echo "<hr>";
-		return;
-	}
-	if($root->nodeName=='h3'){
-		echo $root->nodeName."<br>";
-		print_r($root);
-		echo "<hr>";
-		return;
-	}
-	if($root->nodeName=='h4'){
-		echo $root->nodeName."<br>";
-		print_r($root);
-		echo "<hr>";
-		return;
-	}
-	if($root->nodeName=='h5'){
-		echo $root->nodeName."<br>";
-		print_r($root);
-		echo "<hr>";
-		return;
-	}
-	if($root->nodeName=='h6'){
-		echo $root->nodeName."<br>";
-		print_r($root);
-		echo "<hr>";
-		return;
-	}
-	*/
+	
 	if($root->nodeName=='img'){
 		echo $root->nodeName."<br>";
 		print_r($root);
@@ -212,11 +181,6 @@ function rss_muk_xml_to_array($root,$data,$heading,$first_h2_encountered,$first_
 function rss_muk_data_scan($depth,$root,\DOMDocument &$data_pre_h,\DOMDocument &$data_dom,&$heading) {
 	global $first_h1_encountered,$first_h2_encountered;
 	/*
-	echo "<hr>";
-	rss_muk_p_sp($depth);
-	echo $depth." ".$root->nodeName."<br>";
-	print_r($root);
-	echo "<hr>";
 	*/
 	if($root->nodeName=='p' || $root->nodeName=='table' || $root->nodeName=='code' || $root->nodeName=='img' || $root->nodeName=='ul' || $root->nodeName=='ol'  || $root->nodeName=='a'  || $root->nodeName=='video'  || $root->nodeName=='audio'  || $root->nodeName=='h4' || $root->nodeName=='h5' || $root->nodeName=='h6'){
 		
@@ -259,35 +223,7 @@ function rss_muk_data_scan($depth,$root,\DOMDocument &$data_pre_h,\DOMDocument &
 		}
 		
 	}
-	/*
-    if ($root->hasChildNodes()) {
-        $children = $root->childNodes;
-		
-        if ($children->length == 1) {
-            $child = $children->item(0);
-            if ($child->nodeType == XML_TEXT_NODE) {
-                $result['_value'] = $child->nodeValue;
-                return count($result) == 1
-                    ? $result['_value']
-                    : $result;
-            }
-        }
-		
-        $groups = array();
-        foreach ($children as $child) {
-            if (!isset($result[$child->nodeName])) {
-                $result[$child->nodeName] = data_scan($child,$data,$heading,$first_h2_encountered,$first_h1_encountered);
-            } else {
-                if (!isset($groups[$child->nodeName])) {
-                    $result[$child->nodeName] = array($result[$child->nodeName]);
-                    $groups[$child->nodeName] = 1;
-                }
-                $result[$child->nodeName][] = data_scan($child,$data,$heading,$first_h2_encountered,$first_h1_encountered);
-            }
-        }
-		
-    }
-	*/
+	
 }
 function rss_muk_data_fetch_from_link($url,$link_id){
 	$heading="";
@@ -309,15 +245,7 @@ function rss_muk_data_fetch_from_link($url,$link_id){
 	$body=$dom1->getElementsByTagName('body')[0];
 	$title=$dom1->getElementsByTagName('title')[0]->textContent;
 	rss_muk_data_scan(0,$body,$data_pre_h,$data_dom,$heading);
-	//echo "heading:".$xmlArray;
-	//echo "data:".$xmlArray[1];
-	/*echo "<hr>";
-	echo $heading;
-	echo "<hr>";
-	print_r($data_dom->saveHTML());
-	echo "<hr>";
-	print_r($data_pre_h->saveHTML());
-	*/
+	
 	rss_muk_ins_link_data($link_id,$heading." | ".$title ,$data_dom->saveHTML()."<hr>".$data_pre_h->saveHTML());
 	
 	if (strcmp(strtolower($heading." | ".$title), " | ")==0 || strcmp(strtolower($heading." | ".$title), "|")==0 || stripos(strtolower($heading." | ".$title), "502 error") !== false || stripos(strtolower($heading." | ".$title), "redirect") !== false || stripos(strtolower($heading." | ".$title), "forbidden") !== false || stripos(strtolower($heading." | ".$title), "unavailable") !== false || stripos(strtolower($heading." | ".$title), " 404 ") !== false || stripos(strtolower($heading." | ".$title), "not found") !== false || stripos(strtolower($heading." | ".$title), "about us") !== false || stripos(strtolower($heading." | ".$title), "contact") !== false || stripos(strtolower($heading." | ".$title), "privacy policy") !== false ||stripos(strtolower($heading." | ".$title), "terms and condition") !== false ||stripos(strtolower($heading." | ".$title), "terms & condition") !== false || stripos(strtolower($heading." | ".$title), "moved") !== false){
@@ -327,31 +255,13 @@ function rss_muk_data_fetch_from_link($url,$link_id){
 	}
 	
 	
-	/*
-	@$dom1->loadHTML($strfile);
-	$anchorsinner=$dom1->getElementsByTagName("p");
-	foreach($anchorsinner as $element2){
-	   $para=$element2->textContent;
-	   $para=preg_replace('/\s+/', ' ',$para);
-	   if(strlen($para)>40){
-		   echo "<p>".$para."</p>";
-	   }
-	}
-	*/
+	
 	$anchorsinner_img=$body->getElementsByTagName("img");
 	foreach($anchorsinner_img as $element2_img){
 	   $img_link=$element2_img->getAttribute('src');
 	   $img_link=rss_muk_rel2abs($img_link,$url);
 	   rss_muk_ins_new_img_link($img_link,$link_id);
-	   //echo $img_link;
-	   //$img_size=getimagesize($urlImg);
-	   /*if(is_image($img_link))
-	   {	//echo "img size:".getimagesize($img_link);
-	   }*/
-	   /*
-			echo $img_link;
-			echo "<img src='".$img_link."'/>";
-			*/
+	   
 	   
 	}
 	
