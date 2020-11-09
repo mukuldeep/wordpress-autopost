@@ -5,7 +5,7 @@
 /*
 Plugin Name: rss crw
 Plugin URI: https://raabnits.com/
-Description: developed for personal use only
+Description: developed for educational purpose only
 Version: 4.1.2
 Author: mukul
 Author URI: https://raabnits.com/
