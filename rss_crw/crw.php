@@ -1,6 +1,6 @@
 <?php
 function rss_muk_crl($url){
-	//$proxy = '172.16.102.28:8080';
+	//$proxy = '170.160.132.208:8080';
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
 	//curl_setopt($ch, CURLOPT_PROXY, $proxy);
